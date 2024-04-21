@@ -32,6 +32,10 @@ class Record:
         self.phones = [p for p in self.phones if str(p) != phone]
 
     def edit_phone(self, old_phone, new_phone):
+        old_phone_obj = self.find_phone(old_phone)
+        if old_phone_obj is None:
+            raise ValueError(f"Phone number '{old_phone}' does not exist for contact '{self.name.value}'.")
+        
         self.remove_phone(old_phone)
         self.add_phone(new_phone)
 
